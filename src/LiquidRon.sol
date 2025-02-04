@@ -211,6 +211,7 @@ contract LiquidRon is ERC4626, RonHelper, Pausable, ValidatorTracker {
 
     /// @dev Prunes the validator list by removing validators with no rewards and no staking amounts
     /// To remove redundant reads if a consensus address is not used anymore or has renounced
+@audit Anybody can front-run any validator and call this function to make sure that innocent validators are pruned
     function pruneValidatorList() external {
         uint256 listCount = validatorCount;
         address[] memory proxies = new address[](stakingProxyCount);
